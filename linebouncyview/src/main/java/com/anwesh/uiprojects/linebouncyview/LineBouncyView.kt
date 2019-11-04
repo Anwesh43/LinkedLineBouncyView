@@ -29,10 +29,10 @@ fun Canvas.drawLineBouncy(gap : Float, w : Float, size : Float, scale : Float, p
     val sc1 : Float = scale.divideScale(0, 2)
     val sc2 : Float = scale.divideScale(1, 2)
     val sf : Float = sc2.sinify()
-    val x : Float = w * sc2
+    val x : Float = size + (w - 2 * size) * sc2
     val y : Float = -gap * sf
     drawCircle(x, y, size, paint)
-    drawLine(0f, 0f, size * sc1, 0f, paint)
+    drawLine(0f, 0f, w * sc1, 0f, paint)
 }
 
 fun Canvas.drawLBNode(i : Int, scale : Float, paint : Paint) {
@@ -74,7 +74,7 @@ class LineBouncyView(ctx : Context) : View(ctx) {
             if (Math.abs(scale - prevScale) > 1) {
                 scale = prevScale + dir
                 dir = 0f
-                prevScale
+                prevScale = scale
                 cb(prevScale)
             }
         }
