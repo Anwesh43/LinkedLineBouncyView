@@ -201,6 +201,14 @@ class LineBouncyView(ctx : Context) : View(ctx) {
                 animator.start()
             }
         }
+    }
 
+    companion object {
+
+        fun create(activity : Activity) : LineBouncyView {
+            val view : LineBouncyView = LineBouncyView(activity)
+            activity.setContentView(view)
+            return view
+        }
     }
 }
