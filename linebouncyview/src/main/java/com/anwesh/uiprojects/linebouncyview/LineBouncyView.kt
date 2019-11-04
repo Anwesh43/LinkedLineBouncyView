@@ -179,4 +179,27 @@ class LineBouncyView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : LineBouncyView) {
+
+        private val animator : Animator = Animator(view)
+        private val lb : LineBouncy = LineBouncy(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            lb.draw(canvas, paint)
+            animator.animate {
+                lb.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            lb.startUpdating {
+                animator.start()
+            }
+        }
+
+    }
 }
